@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,400;1,700&display=swap");
+
+.audio_player {
+  position: relative !important;
+  margin: 0 auto !important;
+  background-color: #dfdfdf !important;
+  height: 11rem !important;
+}
+.audio_player-container {
+  transform: translateY(10rem);
+}
+
+.player {
+  width: 20rem;
+  height: 5rem;
+}
+
+.toggle_buttons {
+  width: auto;
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.toggle_buttons > .MuiSvgIcon-root {
+  margin: 5px;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 1.4rem;
+  border-radius: 5px;
+}
+
+.toggle_buttons > .MuiSvgIcon-root:hover {
+  background-color: rgba(0, 0, 0, 0.473);
+}
+
+.title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 10px;
+  margin: 10px;
+  transform: translateX(12px);
+}
+
+.tracks {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tracks .btn {
+  font-size: 1.8rem;
+  z-index: 20;
+  cursor: pointer;
+  transform: translateX(-30px);
+}
+
+.tracks .btn button {
+  border: none;
+  background-color: #dfdfdf;
+}
+
+.tracks .btn button:active,
+.tracks .btn button:focus {
+  outline: none;
+}
+
+.tracks .btn a {
+  padding: 4px 8px;
+}
+
+.tracks .language-select {
+  width: 70px;
+  margin-left: 15px;
+  z-index: 20;
+  height: 25px;
+  font-size: 0.7rem;
+  transform: translate(24px, 10px);
+}
+
+.audio_player-container {
+  transform: translateY(0.5rem);
+  top: 25%;
+  left: 1%;
+}
+
+.btn-icons {
+  border-radius: 10px;
+  margin: 5px;
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.iconButtons {
+  margin: 5px;
+  border: none;
+  background-color: #dfdfdf;
+}
+
+.iconButtons:hover {
+  background-color: rgba(0, 0, 0, 0.199);
+}
+
+.iconButtons:focus,
+.iconButtons:active {
+  outline: none;
+}

@@ -1,0 +1,23 @@
+/* .Music {
+  transform: translateY(-8rem);
+  top: 25%;
+  left: 7%;
+} */
+
+/* .Music:focus,
+.Music:active {
+} */
+
+.audio {
+  border-radius: 5px !important;
+  width: 25rem;
+  /* height: 100%; */
+  background-color: #dfdfdf0a !important;
+  border-radius: 10px !important;
+  color: ;
+  transform: translateY(16px);
+}
+.audio:focus,
+.audio:active {
+  outline: none;
+}
