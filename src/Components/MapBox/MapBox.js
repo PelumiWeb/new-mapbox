@@ -1,4 +1,4 @@
-import React, {useState,useEffect,useContext, useRef} from 'react'
+import React, {useState,useEffect,useContext} from 'react'
 import ReactMapGL, {Source, Layer, Marker, Popup} from 'react-map-gl'
 import axios from 'axios'
 import './MapBox.css'
@@ -10,8 +10,6 @@ import { useObserver } from 'mobx-react';
 
 function MapBox () {
     const store = useContext(StoreContext)
-    // const mapRef = useRef()
-    // console.log(mapRef.current?.getMap())
   
     const [map, setMap] = useState(null)
     const [viewport, setViewport] = useState({
@@ -34,31 +32,6 @@ function MapBox () {
    map?.on('mousedown', 'features', function() {
      console.log('clicked')
    })
-   map?.on('click', 'features', function() {
-     console.log('polygon')
-   })
-
-   map?.on('load', function() {
-    // map.addSource('feature', {
-    //   'type' : 'geojson',
-    //   'data': 'geometry',
-    //   'coordinates': [-107.810134, 37.936195],
-    //                   [-107.810083, 37.936294]
-    //   type: "LineString",
-    //   properties: {},
-      // type: "Feature"
-    })
-
-    map.addLayer({
-      'id' : 'feature-layer',
-      'type' : 'line',
-      'source' : 'feature',
-      'paint' : {
-        'line-color' : 'green',
-        
-      }
-    })
-  })
    
     useEffect(() => {
         const url = "https://52-90-82-235.maverickmaven.com/geotourdata/json.cfm?h=-107,37,s,en,3A771765"
@@ -82,7 +55,7 @@ function MapBox () {
 
     return useObserver(() => (
         <React.Fragment>
-            {console.log(data)}
+            
             
              {/* data ? <div class="loader"></div> : */}
         {/* <div> */}
@@ -159,7 +132,7 @@ function MapBox () {
       {/* {console.log(map)} */}
 
     
-             {/* {
+             {
               (data && (data?.map((data, index) =>  
         <div onClick={console.log}>
         <Source 
@@ -181,34 +154,16 @@ function MapBox () {
             
               </Layer>
         </Source>
-        </div> */}
+        </div>
         
-     {/* )))} */}
-          {/* { 
-          data && (data.map(data =>
-          <Source id='features' type='geojson' data={data?.geojson}/>
-          ))
+     )))}
+
+          {
+            series && (series.map(series => 
+            <Source id='series' type='geojson' data={series.geojson} />
+            ))
           }
-
-          <Layer 
-          id='features'
-          source='features'
-          type='line'
-          layout= {{
-            'line-join': 'round',
-            'line-cap' : 'round'
-          }}
-          paint={{
-            'line-color': 'green',
-              'line-width': 8
-            }}
-          
-          />
-         
-
-      
-            <Source id='series' type='geojson' data={series?.[0].geojson} />
-          
+            {console.log(series?.[0].geojson)}
          <Layer  
          source='series'
          id='series'
@@ -218,7 +173,7 @@ function MapBox () {
           'fill-opacity': 0.2
          }}
          /> 
-            )) */}
+            ))
               {/* <Source onClick={console.log('clicked')} id='main' type='geojson' data={data?.[0].geojson}/>
               <Layer 
               source='main'
