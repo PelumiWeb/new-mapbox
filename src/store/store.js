@@ -28,7 +28,8 @@ export const StoreProvider = ({children}) => {
         duration: null,
         addDuration: duration => {
             store.duration = duration
-        }
+        },
+        
 
     }));
 

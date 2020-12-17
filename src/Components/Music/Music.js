@@ -8,9 +8,13 @@ import axios from 'axios'
 
 function Music({}) {
   const store = useContext(StoreContext)
- const [data, setData] = useState()
+ const [data, setData] = useState(null)
+ const [music, setMusic] = useState()
+ const [duration, setDuration] = useState(null)
+  
 
-  useEffect(() => {
+
+  useEffect(() =>  {
 
     const url = "https://52-90-82-235.maverickmaven.com/geotourdata/json.cfm?h=-107,37,s,en,3A771765"
 
@@ -54,6 +58,7 @@ const handleLoadMetadata = (meta) => {
 
    return useObserver(() => (
     <div className='Music'>
+ 
     <ReactAudio 
     className={'audio'}
     src={store.currentSong}

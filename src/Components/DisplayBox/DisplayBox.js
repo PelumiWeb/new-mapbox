@@ -33,16 +33,16 @@ useEffect(() => {
             let Series = response.data.features.filter(elem => {
                     return  elem.type === 'Series'
                 })
-            // let allData = response.data.features.map(el => {
-            //   return el 
-            //  })
+            let allData = response.data.features.map(el => {
+              return el 
+             })
             //  setBothFeatuesAndSeries(allData)
              setData(features)
             //  setData2(allData)
 
-            //  let song = response.data.features.filter(el => {
-            //     return el.assets[0]?.audio === store.currentSong
-            //    })
+             let song = response.data.features.filter(el => {
+                return el.assets?.[0]?.audio === store.currentSong
+               })
 
             //    setSong(song)
             

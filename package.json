@@ -17,6 +17,7 @@
     "react-audio-player": "^0.14.0",
     "react-dom": "^17.0.1",
     "react-map-gl": "^5.2.10",
+    "react-mapbox-gl": "^5.1.1",
     "react-scripts": "4.0.1",
     "react-time-series": "^1.0.19",
     "react-word-limit": "^1.0.1",
