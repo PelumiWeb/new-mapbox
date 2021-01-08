@@ -4,7 +4,8 @@
   position: relative !important;
   margin: 0 auto !important;
   background-color: #dfdfdf !important;
-  height: 11rem !important;
+  height: 12rem !important;
+  margin: 20px !important;
 }
 .audio_player-container {
   transform: translateY(10rem);
@@ -47,6 +48,18 @@
   transform: translateX(12px);
 }
 
+@media (max-width: 440px) {
+  .title {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 280px) {
+  .title {
+    font-size: 0.55rem;
+  }
+}
+
 .tracks {
   display: flex;
   justify-content: space-around;
@@ -62,6 +75,7 @@
 .tracks .btn button {
   border: none;
   background-color: #dfdfdf;
+  cursor: pointer;
 }
 
 .tracks .btn button:active,
@@ -69,8 +83,14 @@
   outline: none;
 }
 
+.tracks .btn button:hover,
+.tracks .btn button:active {
+  background-color: rgb(236, 236, 236);
+  border-radius: 10px;
+}
+
 .tracks .btn a {
-  padding: 4px 8px;
+  padding: 1px 2px;
 }
 
 .tracks .language-select {
@@ -101,11 +121,43 @@
   background-color: #dfdfdf;
 }
 
-.iconButtons:hover {
+.iconButtons:hover,
+.iconButtons:active {
   background-color: rgba(0, 0, 0, 0.199);
 }
 
 .iconButtons:focus,
 .iconButtons:active {
   outline: none;
+}
+
+.active1 {
+  background-color: rgba(0, 0, 0, 0.199);
+}
+
+.active2 {
+  background-color: rgba(0, 0, 0, 0.199);
+}
+
+.active3 {
+  background-color: rgba(0, 0, 0, 0.199);
+}
+
+@media (max-width: 490px) {
+  .style_app {
+    width: 27.5rem;
+  }
+}
+
+@media (max-width: 440px) {
+  .style_app {
+    width: 22.5rem;
+    transform: translateX(19px);
+  }
+}
+
+@media (max-width: 280px) {
+  .style_app {
+    width: 18rem;
+  }
 }

@@ -1,5 +1,5 @@
 import React, {createContext} from 'react'
-import {useLocalStore, useObserver} from 'mobx-react'
+import {useLocalStore} from 'mobx-react'
 
 export const StoreContext = createContext()
 
@@ -13,7 +13,7 @@ export const StoreProvider = ({children}) => {
         addImage: image => {
             store.image = image
         },
-        name: null,
+        name: "",
         addName: name => {
             store.name = name
         },
@@ -29,6 +29,10 @@ export const StoreProvider = ({children}) => {
         addDuration: duration => {
             store.duration = duration
         },
+        playing: false,
+        addPlaying: playing => {
+            store.playing = playing
+        }
         
 
     }));

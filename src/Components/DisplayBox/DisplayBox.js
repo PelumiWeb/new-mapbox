@@ -4,6 +4,8 @@ import axios from 'axios'
 import PlayList from '../PlayList/PlayList'
 import MapBox from '../MapBox/MapBox'
 import {StoreContext} from '../../store/store'
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 
 
@@ -15,7 +17,7 @@ function DisplayBox({displayImage, displayMap, displaySongs}) {
 // const [song, setSong] = useState(null)
     const [data2, setData2] = useState(null)
     const [data, setData] = useState(null)
-    const [currentData, setCurrentData] = useState(null)
+    const [series, setSeries] = useState(null)
    
     
 useEffect(() => {
@@ -30,39 +32,43 @@ useEffect(() => {
         let features = response.data.features.filter(elem => {
             return  elem.type === 'Feature'
           })
-            let Series = response.data.features.filter(elem => {
-                    return  elem.type === 'Series'
-                })
-            let allData = response.data.features.map(el => {
-              return el 
-             })
-            //  setBothFeatuesAndSeries(allData)
+        
              setData(features)
-            //  setData2(allData)
-
-             let song = response.data.features.filter(el => {
-                return el.assets?.[0]?.audio === store.currentSong
-               })
-
-            //    setSong(song)
-            
+        
  })
+ axios.get(url).then(response => {
+    const series = response.data.features.filter(elem => {
+      return  elem.type === 'Series'
+    })
+    setSeries(series)
+  })
 
    
 },[])
 
     return (
      <div className={displayImage || displayMap || displaySongs? "display_box display_box-show" : "show_box"}>
+         {console.log(series?.[0].photo)}
             <div className={displayImage ? "image image_show" : "image"}>
-                <img src={store.image ? store.image : "https://boximg-420.s3.amazonaws.com/BF42C786A23049F7B09BE06378B16A5D_07022020.jpg"} alt=""/>
+                {
+                    !store.image &&  !series?.[0].photo? 
+                    <Loader
+                    type="ThreeDots"
+                    color="#00BFFF"
+                    height={100}
+                    width={100}
+                 />  :
+                <img src={!store.image ? series?.[0].photo : store.image } alt=""/>
+                }
             </div>
             <div className={displayMap ? 'Map Map_show' : 'Map'}>
             <MapBox />
             </div>
-        <div className={displaySongs ? "play_list play_list-show" : "play_list"}>
+        <div className={displaySongs ? "play_list play_list-show border" : "play_list border-2"}>
         <PlayList 
          displaySongs={displaySongs}
-         data={data}/>
+         data={data}
+         series={series}/>
         </div>
        
     </div>

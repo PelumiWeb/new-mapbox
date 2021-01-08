@@ -1,24 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,400;1,700&display=swap");
 
 .App {
-  text-align: center;
+  /* text-align: center;
   display: flex;
   flex-direction: column;
-  /* position: relative; */
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  /* font-size: 1rem; */
+  min-height: 100vh;
+  min-width: 100%; */
+  display: inline;
 }
 
-.App-header {
-  min-height: 100vh;
-  /* font-size: calc(10px + 2vmin); */
-  color: rgb(0, 0, 0);
-}
 .audio_player-container {
   min-width: 30rem;
-  /* background-color: #c9c9c9; */
   height: 8rem;
   position: relative !important;
 }

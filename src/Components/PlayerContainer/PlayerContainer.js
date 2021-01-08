@@ -9,48 +9,42 @@ import {StoreContext} from '../../store/store'
 import { useObserver } from 'mobx-react';
 import WordLimit from 'react-word-limit'
 import axios from 'axios'
+import {useParams} from 'react-router-dom'
 
 
 function PayerContainer() {
+
+	const {id} = useParams()
+	console.log(id)
   let [showImage, setShowImage] = useState(false)
   let [showMap, setShowMap] = useState(false)
   let [showSongs, setShowSongs] = useState(false)
   const store = useContext(StoreContext)
   const [data, setData] = useState()
-  const [value, setValue] = useState()
+  const [series, setSeries] = useState()
+  const [active1, setActive1] = useState(false)
+  const [active2, setActive2] = useState(false)
+  const [active3, setActive3] = useState(false)
+
 
    
   useEffect(() => {
 
     const url = "https://52-90-82-235.maverickmaven.com/geotourdata/json.cfm?h=-107,37,s,en,3A771765"
 
-    axios({
-       method: 'get',
-       url,
-       responseType: 'stream'
-    }).then(response => {
-        let features = response.data.features.filter(elem => {
-            return  elem.type === 'Feature'
-          })
-            let Series = response.data.features.filter(elem => {
-                    return  elem.type === 'Series'
-                })
-            // let allData = response.data.features.map(el => {
-            //   return el 
-            //  })
-            //  setBothFeatuesAndSeries(allData)
-			 setData(features)
-			 store.addData(features)
-            //  setData2(allData)
+	axios.get(url).then(response => {
+		const series = response.data.features.filter(elem => {
+		  return  elem.type === 'Series'
+		})
+		setSeries(series)
+	  })
 
-            //  let song = response.data.features.filter(el => {
-            //     return el.assets[0]?.audio === store.currentSong
-            //    })
-
-            //    setSong(song)
-            
- })
-
+	  axios.get(url).then(response => {
+		const features = response.data.features.filter(elem => {
+		  return  elem.type === 'Feature'
+		})
+		setData(features)
+	  })
    
 },[])
 
@@ -60,21 +54,32 @@ function PayerContainer() {
 	setShowImage(!showImage)
 	setShowMap(false)
 	setShowSongs(false)
+	setActive1(true)
+	setActive2(false)
+	setActive3(false)
+
   }
   const displayMap = () => {
 	setShowMap(!showMap)
 	setShowSongs(false)
 	setShowImage(false)
+	setActive1(false)
+	setActive2(false)
+	setActive3(true)
+
   }
   const displaySongs = () => {
 	setShowSongs(!showSongs)
 	setShowImage(false)
 	setShowMap(false)
+	setActive1(false)
+	setActive2(true)
+	setActive3(false)
   }
 
   return useObserver(() => (
 	<React.Fragment>
-	<div>
+	<div className="style_app" >
 	   
 	<DisplayBox 
 	displayImage={showImage}
@@ -83,20 +88,20 @@ function PayerContainer() {
 	/>
 	</div>
 
-  <div className="audio_player">
+  <div className="audio_player style_app">
 	<div className="title">
-		<WordLimit limit={15}>
-	  {!store.name ? "" : store.name}
-	  </WordLimit>
+	{/* <WordLimit limit={15}> */}
+	    {!store?.name ? series?.[0]?.name : store?.name}
+	  {/* </WordLimit>  */}
 	</div>
 	<div className="toggle_buttons">
-		<button  className="iconButtons">
+		<button  className={active2 ? "active2 iconButtons" : "iconButtons"}>
 	  <ListOutlinedIcon onClick={displaySongs} />
 	  </button>
-	  <button className="iconButtons">
+	  <button className={active1 ? "active1 iconButtons" : "iconButtons" }>
 	  <ImageOutlinedIcon onClick={displayImage} />
 	  </button> 
-	  <button className="iconButtons">
+	  <button className={active3 ? "active3 iconButtons" : "iconButtons" }>
 	  <MapOutlinedIcon onClick={displayMap} />
 	  </button>
 	</div>
@@ -113,8 +118,8 @@ function PayerContainer() {
 			store.addSongIndex(Index)
 			const Value = data[Index] 
 			store.addSong(Value?.assets?.[0].audio)
-			store.addName(Value.name)
-			store.addImage(Value.photo)
+			store.addName(Value?.name)
+			store.addImage(Value?.photo)
 		}}
 		>&#8617;</a>
 		</button>
@@ -126,8 +131,8 @@ function PayerContainer() {
 			store.addSongIndex(Index)
 			const Value = data[Index] 
 			store.addSong(Value?.assets?.[0].audio)
-			store.addName(Value.name)
-			store.addImage(Value.photo)
+			store.addName(Value?.name)
+			store.addImage(Value?.photo)
 
 		  }}>&#8618;</a>
 		  </button>

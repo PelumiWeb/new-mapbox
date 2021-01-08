@@ -4,15 +4,23 @@ import ReactAudio from 'react-audio-player'
 import './Music.css'
 import {StoreContext} from '../../store/store' 
 import axios from 'axios'
+import {useParams} from 'react-router-dom'
+
 
 
 function Music({}) {
+  const {id} = useParams()
+	console.log(id)
   const store = useContext(StoreContext)
  const [data, setData] = useState(null)
+ const [series, setSeries] = useState(null)
+
  const [music, setMusic] = useState()
  const [duration, setDuration] = useState(null)
   
+  useEffect(() => {
 
+  },[])
 
   useEffect(() =>  {
 
@@ -35,13 +43,13 @@ function Music({}) {
             //  setBothFeatuesAndSeries(allData)
 			 setData(features)
 		
-            //  setData2(allData)
-
-            //  let song = response.data.features.filter(el => {
-            //     return el.assets[0]?.audio === store.currentSong
-            //    })
-         
-            //    setSong(song)
+       axios.get(url).then(response => {
+        const series = response.data.features.filter(elem => {
+          return  elem.type === 'Series'
+        })
+        setSeries(series)
+      })
+    
             
  })
 
@@ -57,20 +65,21 @@ const handleLoadMetadata = (meta) => {
       
 
    return useObserver(() => (
+
     <div className='Music'>
- 
     <ReactAudio 
     className={'audio'}
-    src={store.currentSong}
+    src={!store.currentSong ? series?.[0].assets[0].audio : store.currentSong  }
+  
     controls
-    autoPlay
+    autoPlay={false}
     onEnded={() => {
-      const Index = store.songIndex + 1
-			store.addSongIndex(Index)
-			const Value = data[Index] 
+      const Index = 0
+			const Value = series[Index] 
 			store.addSong(Value?.assets?.[0].audio)
 			store.addName(Value.name)
-			store.addImage(Value.photo)
+      store.addImage(Value.photo)
+    console.log('Ended')
 
     }}
     

@@ -17,6 +17,21 @@
   color: ;
   transform: translateY(16px);
 }
+
+@media (max-width: 490px) {
+  .audio {
+    width: 20rem;
+    transform: translate(-50px, 10px);
+  }
+}
+
+@media (max-width: 440px) {
+  .audio {
+    width: 15rem;
+    transform: translate(-85px, 10px);
+  }
+}
+
 .audio:focus,
 .audio:active {
   outline: none;
