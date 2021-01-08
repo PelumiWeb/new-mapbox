@@ -13,15 +13,7 @@ import { useObserver } from 'mobx-react';
 
 function MapBox () {
     const store = useContext(StoreContext)
-    const width = 350;
-    const map = useRef()
-
-    const styleMap = () => {
-      <div></div>
-    }
-  
-
-
+    const map = useRef()\
     const [viewport, setViewport] = useState({
         width: "100%",
         height: 333,
